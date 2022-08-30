@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovimentation : MonoBehaviour
 {
+    [SerializeField] Transform sight;
     InputMappings inputMappings;
     Rigidbody2D rb;
     //MOVEMENT
@@ -28,7 +29,7 @@ public class PlayerMovimentation : MonoBehaviour
         inputMappings.Disable();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Move(inputMappings.Player.Move.ReadValue<Vector2>(), speed);
         Rotate(inputMappings.Player.Look.ReadValue<Vector2>());
@@ -42,12 +43,12 @@ public class PlayerMovimentation : MonoBehaviour
 
         float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
         
-        this.transform.eulerAngles = new Vector3(0, 0, angle-90);
+        sight.eulerAngles = new Vector3(0, 0, angle-90);
 
     }
 
     private void Move(Vector2 direction, float speed)
     {
-        rb.velocity = ((this.transform.up * direction.y) + (this.transform.right * direction.x)) * speed;
+        rb.velocity = direction * speed; //((sight.up * direction.y) + (sight.right * direction.x)) * speed;
     }
 }
