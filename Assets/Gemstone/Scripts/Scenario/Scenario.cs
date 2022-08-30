@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Scenario : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Scenario : MonoBehaviour
     private float t; //used to control interpolated animations
     // NEMESIS
     private bool nemesis = false;
+    private bool nemesisSpawned = false;
     [SerializeField] private float nemesisTimer = 10;
     private float nemesiscurTime = 0;
     void OnTriggerEnter2D(Collider2D other)
@@ -26,7 +28,7 @@ public class Scenario : MonoBehaviour
 
     private void Update()
     {
-        if (t < 1 && t > 0)
+        if (t <= 1 & t >= 0)
         {
             if (hiding)
             {
@@ -39,7 +41,7 @@ public class Scenario : MonoBehaviour
             hideSprite.color = new Color(hideSprite.color.r, hideSprite.color.g, hideSprite.color.b, Mathf.Lerp(1, 0, t));
         }
 
-        if (nemesis && nemesiscurTime > -1)
+        if (!nemesisSpawned && nemesis && nemesiscurTime > -1)
         {
             nemesiscurTime -= Time.fixedDeltaTime;
             if (nemesiscurTime <= 0)
@@ -51,7 +53,9 @@ public class Scenario : MonoBehaviour
 
     private void SpawnNemesis()
     {
-        Debug.Log("Spawning Nemesis");
+        Transform spawPoint = this.transform.parent.Find("SpawnPoints/"+ Random.Range(1,4).ToString());
+        Instantiate(Resources.Load("Prefabs/Nemesis"),spawPoint.position,Quaternion.identity,spawPoint);
+        nemesisSpawned = true;
     }
 
     private void ShowScenario()
