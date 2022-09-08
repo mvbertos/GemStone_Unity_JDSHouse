@@ -48,12 +48,15 @@ public class Scenario : MonoBehaviour
 
     private void SpawnNemesis()
     {
-        //if there is no Nemesis in game
-        //spawn nemesis
-        Transform spawPoint = this.transform.Find("SpawnPoints/" + Random.Range(1, 4).ToString());
-        Instantiate(Resources.Load("Prefabs/Nemesis"), spawPoint.position, Quaternion.identity, spawPoint);
-        //else
-        //return
+        if (GameManager.SpawnNemesis)
+        {
+            //if there is no Nemesis in game
+            //spawn nemesis
+            Transform spawPoint = this.transform.Find("SpawnPoints/" + Random.Range(1, 4).ToString());
+            Instantiate(Resources.Load("Prefabs/Nemesis"), spawPoint.position, Quaternion.identity, spawPoint);
+            //else
+            //return
+        }
     }
     private void ScenarioAnimation()
     {

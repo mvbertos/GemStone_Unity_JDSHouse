@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private void Start() {
+    public bool spawnNemesis = true;
+    public static bool SpawnNemesis;
+
+    private void Awake() {
+        SpawnNemesis = spawnNemesis;
+    }
+
+    private void Start()
+    {
         Cursor.lockState = CursorLockMode.Confined;
     }
 }
