@@ -13,20 +13,49 @@ public class Scenario : MonoBehaviour
     private float t; //used to control interpolated animations
     // NEMESIS
     private bool nemesis = false;
-    private bool nemesisSpawned = false;
     [SerializeField] private float nemesisTimer = 10;
     private float nemesiscurTime = 0;
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        ShowScenario();
-    }
 
-    void OnTriggerExit2D(Collider2D other)
+
+    private void Start()
     {
-        HideScenario();
+        EnterScenarioCheck child = this.transform.GetComponentInChildren<EnterScenarioCheck>();
+        child.OnEnterScenario += ShowScenario;
+        child.OnExitScenario += HideScenario;
     }
 
     private void Update()
+    {
+        ScenarioAnimation();
+        NemesisTimer();
+    }
+
+    private void NemesisTimer()
+    {
+        if (FindObjectsOfType<Enemy>().Length > 0 && nemesis && nemesiscurTime > -1)
+        {
+            nemesiscurTime -= Time.fixedDeltaTime;
+            if (nemesiscurTime <= 0)
+            {
+                SpawnNemesis();
+            }
+        }
+        else
+        {
+            nemesiscurTime = nemesisTimer;
+        }
+    }
+
+    private void SpawnNemesis()
+    {
+        //if there is no Nemesis in game
+        //spawn nemesis
+        Transform spawPoint = this.transform.Find("SpawnPoints/" + Random.Range(1, 4).ToString());
+        Instantiate(Resources.Load("Prefabs/Nemesis"), spawPoint.position, Quaternion.identity, spawPoint);
+        //else
+        //return
+    }
+    private void ScenarioAnimation()
     {
         if (t <= 1 & t >= 0)
         {
@@ -40,26 +69,12 @@ public class Scenario : MonoBehaviour
             }
             hideSprite.color = new Color(hideSprite.color.r, hideSprite.color.g, hideSprite.color.b, Mathf.Lerp(1, 0, t));
         }
-
-        if (!nemesisSpawned && nemesis && nemesiscurTime > -1)
-        {
-            nemesiscurTime -= Time.fixedDeltaTime;
-            if (nemesiscurTime <= 0)
-            {
-                SpawnNemesis();
-            }
-        }
     }
 
-    private void SpawnNemesis()
-    {
-        Transform spawPoint = this.transform.parent.Find("SpawnPoints/"+ Random.Range(1,4).ToString());
-        Instantiate(Resources.Load("Prefabs/Nemesis"),spawPoint.position,Quaternion.identity,spawPoint);
-        nemesisSpawned = true;
-    }
 
-    private void ShowScenario()
+    private void ShowScenario(Collider2D other = null)
     {
+        Debug.Log("Showing cenário");
         // Fade out hide sprite
         t = 0;
         hiding = true;
@@ -68,7 +83,7 @@ public class Scenario : MonoBehaviour
         nemesiscurTime = nemesisTimer;
     }
 
-    private void HideScenario()
+    private void HideScenario(Collider2D other = null)
     {
         // Fade in hide scenário
         t = 1;

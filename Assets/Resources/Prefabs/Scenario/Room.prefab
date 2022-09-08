@@ -129,8 +129,8 @@ GameObject:
   - component: {fileID: 3049810363913601742}
   - component: {fileID: 3049810363913601743}
   - component: {fileID: 3049810363913601736}
-  - component: {fileID: 3049810363913601741}
   - component: {fileID: 3759447150284073212}
+  - component: {fileID: 534164797}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -1422,36 +1422,21 @@ CompositeCollider2D:
   - m_Collider: {fileID: 3049810363913601742}
     m_ColliderPaths:
     - - X: 60000000
-        Y: -50000024
+        Y: -50000008
       - X: 60000000
-        Y: 50000024
+        Y: 50000008
       - X: -50000000
-        Y: 50000024
+        Y: 50000008
       - X: -50000000
-        Y: -50000024
+        Y: -50000008
   m_CompositePaths:
     m_Paths:
-    - - {x: 5.999971, y: -5.0000024}
-      - {x: 5.999971, y: 5.0000024}
-      - {x: -5, y: 4.9999733}
-      - {x: -4.999971, y: -5.0000024}
+    - - {x: 5.999971, y: -5.000001}
+      - {x: 5.999971, y: 5.000001}
+      - {x: -5, y: 4.999972}
+      - {x: -4.999971, y: -5.000001}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
---- !u!114 &3049810363913601741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3049810363913601732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79089d88472c4d140bcd4b8c83b5c6a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hideSprite: {fileID: 3049810363910698142}
-  speed: 0.33
-  nemesisTimer: 10
 --- !u!114 &3759447150284073212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1468,6 +1453,18 @@ MonoBehaviour:
   m_Area: 0
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!114 &534164797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3049810363913601732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a2daed353fab3f4ba8cfccca4db18d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3049810364217988574
 GameObject:
   m_ObjectHideFlags: 0
@@ -1478,6 +1475,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3049810364217988572}
   - component: {fileID: 3049810364217988573}
+  - component: {fileID: 1319098668}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -1516,6 +1514,21 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &1319098668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3049810364217988574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79089d88472c4d140bcd4b8c83b5c6a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hideSprite: {fileID: 3049810363910698142}
+  speed: 0.1
+  nemesisTimer: 10
 --- !u!1 &3049810364893331056
 GameObject:
   m_ObjectHideFlags: 0
@@ -2001,79 +2014,79 @@ CompositeCollider2D:
   - m_Collider: {fileID: 3049810364893331066}
     m_ColliderPaths:
     - - X: -40000000
-        Y: 40000020
+        Y: 40000008
       - X: -10000000
-        Y: 40000020
+        Y: 40000008
       - X: -10000000
-        Y: 50000024
+        Y: 50000008
       - X: -50000000
-        Y: 50000024
+        Y: 50000008
       - X: -50000000
-        Y: 10000005
+        Y: 10000002
       - X: -40000000
-        Y: 10000005
+        Y: 10000002
     - - X: 60000000
-        Y: 50000024
+        Y: 50000008
       - X: 20000000
-        Y: 50000024
+        Y: 50000008
       - X: 20000000
-        Y: 40000020
+        Y: 40000008
       - X: 50000000
-        Y: 40000020
+        Y: 40000008
       - X: 50000000
-        Y: 10000005
+        Y: 10000002
       - X: 60000000
-        Y: 10000005
+        Y: 10000002
     - - X: -10000000
-        Y: -40000020
+        Y: -40000008
       - X: -40000000
-        Y: -40000020
+        Y: -40000008
       - X: -40000000
-        Y: -10000005
+        Y: -10000002
       - X: -50000000
-        Y: -10000005
+        Y: -10000002
       - X: -50000000
-        Y: -50000024
+        Y: -50000008
       - X: -10000000
-        Y: -50000024
+        Y: -50000008
     - - X: 60000000
-        Y: -10000005
+        Y: -10000002
       - X: 50000000
-        Y: -10000005
+        Y: -10000002
       - X: 50000000
-        Y: -40000020
+        Y: -40000008
       - X: 20000000
-        Y: -40000020
+        Y: -40000008
       - X: 20000000
-        Y: -50000024
+        Y: -50000008
       - X: 60000000
-        Y: -50000024
+        Y: -50000008
   m_CompositePaths:
     m_Paths:
-    - - {x: 5.999971, y: 1.0000005}
-      - {x: 5.999971, y: 5.0000024}
-      - {x: 2, y: 4.9999733}
-      - {x: 2.0000293, y: 4.000002}
-      - {x: 5, y: 3.9999728}
-      - {x: 5.000029, y: 1.0000005}
-    - - {x: -4.000029, y: 1.0000005}
-      - {x: -3.9999704, y: 4.000002}
-      - {x: -1, y: 4.0000315}
-      - {x: -1.0000293, y: 5.0000024}
-      - {x: -5, y: 4.9999733}
-      - {x: -4.999971, y: 1.0000005}
-    - - {x: 5.999971, y: -5.0000024}
-      - {x: 5.999971, y: -1.0000005}
-      - {x: 5, y: -1.0000298}
-      - {x: 4.9999704, y: -4.000002}
-      - {x: 2, y: -4.0000315}
-      - {x: 2.0000293, y: -5.0000024}
-    - - {x: -1.0000293, y: -5.0000024}
-      - {x: -1.0000293, y: -4.000002}
-      - {x: -4, y: -3.9999728}
-      - {x: -4.000029, y: -1.0000005}
-      - {x: -5, y: -1.0000298}
-      - {x: -4.999971, y: -5.0000024}
+    - - {x: 5.999971, y: 1.0000002}
+      - {x: 5.999971, y: 5.000001}
+      - {x: 2, y: 4.999972}
+      - {x: 2.0000293, y: 4.000001}
+      - {x: 5, y: 3.9999712}
+      - {x: 5.000029, y: 1.0000002}
+    - - {x: -4.000029, y: 1.0000002}
+      - {x: -3.9999704, y: 4.000001}
+      - {x: -1, y: 4.00003}
+      - {x: -1.0000293, y: 5.000001}
+      - {x: -5, y: 4.999972}
+      - {x: -4.999971, y: 1.0000002}
+    - - {x: 5.999971, y: -5.000001}
+      - {x: 5.999971, y: -1.0000002}
+      - {x: 5, y: -1.0000296}
+      - {x: 4.9999704, y: -4.000001}
+      - {x: 2, y: -4.00003}
+      - {x: 2.0000293, y: -5.000001}
+    - - {x: -1.0000293, y: -5.000001}
+      - {x: -1.0000293, y: -4.000001}
+      - {x: -4, y: -3.9999712}
+      - {x: -4.000029, y: -1.0000002}
+      - {x: -5, y: -1.0000296}
+      - {x: -4.999971, y: -5.000001}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!1 &3131763750379785201
