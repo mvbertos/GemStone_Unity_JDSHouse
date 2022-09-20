@@ -15,6 +15,6 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        navMeshAgent.destination = FindObjectOfType<PlayerMovimentation>().gameObject.transform.position;
+        navMeshAgent.destination = FindObjectOfType<Player>().gameObject.transform.position;
     }
 }

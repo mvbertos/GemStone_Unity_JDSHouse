@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovimentation : MonoBehaviour
+public class InputMovimentation : MonoBehaviour
 {
     [SerializeField] Transform sight;
     InputMappings inputMappings;
