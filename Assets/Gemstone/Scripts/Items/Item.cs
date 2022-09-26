@@ -7,12 +7,12 @@ public abstract class Item : MonoBehaviour
     [SerializeField] private ItemData data;
     public ItemData Data { get { return data; } }
 
-    public void Pick(TetrisInventory inventory)
+    public void Pick(SimpleInventory inventory)
     {
         if (inventory != null)
         {
             Debug.Log("Picking Item");
-            inventory.AddItem(new ItemData(data.name, data.description, data.spcRequired, data.spt));
+            inventory.AddItemInAvailableSlot(Data);
             Destroy(this.gameObject);
         }
     }
