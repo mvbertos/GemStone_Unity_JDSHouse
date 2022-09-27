@@ -81,9 +81,13 @@ public class SimpleInventory : MonoBehaviour
         Player player = FindObjectOfType<Player>();
         if (slots[curSlot].data != null)
         {
-            player.ItemHolder.sprite = slots[curSlot].data.spt;
+              GameObject item = Instantiate(Resources.Load<GameObject>("Prefabs/Items/"+slots[curSlot].data.name),player.ItemHolder.transform.position,Quaternion.identity,player.ItemHolder.transform);
+              Rigidbody2D itemrb = item.GetComponent<Rigidbody2D>();
+              itemrb.simulated= false;
         }else{
-            player.ItemHolder.sprite = null;
+            foreach(Transform t in player.ItemHolder.transform){
+                Destroy(t.gameObject);
+            }
         }
     }
 

@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Dummy : Character
 {
+
+    private void Start()
+    {
+        
+    }
+
     public override void Attack()
     {
 
@@ -11,6 +17,7 @@ public class Dummy : Character
 
     public override void Interact()
     {
+        
     }
 
     public override void Interacted()

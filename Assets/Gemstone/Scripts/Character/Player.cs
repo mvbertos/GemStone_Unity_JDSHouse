@@ -52,6 +52,10 @@ public class Player : Character
         if (inventory.GetCurrentSlot().data != null)
         {
             Debug.Log("Using Item:" + inventory.GetCurrentSlot().data.name);
+            Item item = itemHolder.GetComponent<Item>();
+            if(item){
+                item.Use();
+            }
             return;
         }
         Debug.Log("Attacking");
