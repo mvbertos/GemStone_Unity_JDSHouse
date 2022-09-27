@@ -7,7 +7,7 @@ public abstract class Item : MonoBehaviour
     [SerializeField] private ItemData data;
     public ItemData Data { get { return data; } }
 
-    public void Pick(SimpleInventory inventory)
+    public virtual void Pick(SimpleInventory inventory)
     {
         if (inventory != null)
         {
@@ -16,20 +16,20 @@ public abstract class Item : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-    public void Drop()
+    public virtual void Drop()
     {
         Debug.Log("Dropping Item");
     }
-    public void Use()
+    public virtual void Use()
     {
         Debug.Log("Using Item");
     }
-    public void Equip()
+    public virtual void Equip()
     {
         Debug.Log("Equiping Item");
 
     }
-    public void UnequipItem()
+    public virtual void UnequipItem()
     {
         Debug.Log("Unequiping Item");
     }

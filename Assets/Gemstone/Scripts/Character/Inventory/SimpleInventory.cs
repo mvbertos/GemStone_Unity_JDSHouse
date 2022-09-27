@@ -38,7 +38,7 @@ public class SimpleInventory : MonoBehaviour
 
         if (uIRaycast.IsPointerOverUIElement())
         {
-            if (uIRaycast.GetEventSystemRaycastResult().gameObject.TryGetComponent<InventorySlot>(out InventorySlot inventorySlot))
+            if (uIRaycast.GetEventSystemRaycastResult().gameObject.TryGetComponent<InventorySlot>(out InventorySlot inventorySlot) && inventorySlot.data != null)
             {
                 if (!instance && inventorySlot.data != null)
                 {
@@ -48,6 +48,7 @@ public class SimpleInventory : MonoBehaviour
                     instance.Description.text = inventorySlot.data.description;
                     instance.transform.parent = canvas.transform;
                 }
+
                 instance.transform.position = mousePos;
             }
         }
@@ -72,8 +73,20 @@ public class SimpleInventory : MonoBehaviour
         }
 
         slots[curSlot].EnableHighlight();
-
+        UpdatePlayerSpriteHolder();
     }
+
+    public void UpdatePlayerSpriteHolder()
+    {
+        Player player = FindObjectOfType<Player>();
+        if (slots[curSlot].data != null)
+        {
+            player.ItemHolder.sprite = slots[curSlot].data.spt;
+        }else{
+            player.ItemHolder.sprite = null;
+        }
+    }
+
     private void ChangeSlot(int v)
     {
         slots[curSlot].DisableHighlight();
@@ -85,6 +98,7 @@ public class SimpleInventory : MonoBehaviour
 
         curSlot = v;
         slots[curSlot].EnableHighlight();
+        UpdatePlayerSpriteHolder();
     }
 
     public void AddItemInAvailableSlot(ItemData item)
@@ -94,6 +108,7 @@ public class SimpleInventory : MonoBehaviour
             if (slot.data == null)
             {
                 slot.SetItem(item);
+                UpdatePlayerSpriteHolder();
                 return;
             }
         }

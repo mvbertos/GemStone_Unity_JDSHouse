@@ -9,6 +9,11 @@ public class Player : Character
     public InputMappings inputMappings { private set; get; }
     [SerializeField] private SimpleInventory inventory;
     public SimpleInventory Inventory { get { return inventory; } }
+    private Vector2 aimDirection;
+    [SerializeField] private Transform indicator;
+    public Transform Indicator { get { return indicator; } }
+    [SerializeField] private SpriteRenderer itemHolder;
+    public SpriteRenderer ItemHolder { get { return itemHolder; } }
 
     private void Awake()
     {
@@ -20,7 +25,17 @@ public class Player : Character
 
     }
 
+    private void Update()
+    {
+        //update indicator
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        aimDirection = (mousePos - (Vector2)this.transform.position).normalized;
 
+        float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
+
+        indicator.transform.localPosition = aimDirection;
+        indicator.transform.eulerAngles = new Vector3(0, 0, angle);
+    }
 
     private void OnEnable()
     {
