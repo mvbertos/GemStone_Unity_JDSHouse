@@ -34,6 +34,11 @@ public class Player : Character
 
     public override void Attack()
     {
+        if (inventory.GetCurrentSlot().data != null)
+        {
+            Debug.Log("Using Item:" + inventory.GetCurrentSlot().data.name);
+            return;
+        }
         Debug.Log("Attacking");
     }
 
@@ -57,7 +62,8 @@ public class Player : Character
         if (slot && slot.data != null)
         {
             GameObject pref = Resources.Load<GameObject>("Prefabs/Items/" + slot.data.name);
-            Instantiate(pref, this.transform.position, Quaternion.identity);
+            Item item = Instantiate(pref, this.transform.position, Quaternion.identity).GetComponent<Item>();
+            item.Drop();
             inventory.RemoveItem();
         }
     }

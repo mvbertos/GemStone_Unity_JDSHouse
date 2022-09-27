@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 public class InventorySlot : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class InventorySlot : MonoBehaviour
         slotImage.preserveAspect = true;
         qntText.text = qnt.ToString();
     }
+
     public void ClearItem()
     {
         data = null;
@@ -38,7 +40,9 @@ public class InventorySlot : MonoBehaviour
     public void EnableHighlight()
     {
         highlight.gameObject.SetActive(true);
+
     }
+
     public void DisableHighlight()
     {
         highlight.gameObject.SetActive(false);
