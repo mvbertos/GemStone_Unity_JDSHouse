@@ -17,6 +17,7 @@ public class Player : Character
 
     private void Awake()
     {
+        base.Awake();
         inputMappings = new InputMappings();
         inputMappings.Player.Fire.performed += ctx => Attack();
         inputMappings.Player.Interact.performed += ctx => Interact();
@@ -52,15 +53,15 @@ public class Player : Character
         if (inventory.GetCurrentSlot().data != null)
         {
             Debug.Log("Using Item:" + inventory.GetCurrentSlot().data.name);
-            Item item = itemHolder.GetComponent<Item>();
-            if(item){
-                item.Use();
-            }
-            return;
+            GetItem().Use();
         }
-        Debug.Log("Attacking");
+        Chat("Attacking");
     }
 
+    public Item GetItem()
+    {
+        return ItemHolder.GetComponentInChildren<Item>();
+    }
     public override void Interact()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -71,7 +72,7 @@ public class Player : Character
             Rigidbody2D rb = hit.collider.attachedRigidbody;
             if (rb.TryGetComponent<Item>(out Item item))
             {
-                item.Pick(this.inventory);
+                item.Pick(this);
             }
         }
     }

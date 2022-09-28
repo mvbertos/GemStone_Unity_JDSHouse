@@ -2,7 +2,7 @@
 [System.Serializable]
 public class CharacterAttributes
 {
-    public delegate void AttributeChange(int value, int variable);
+    public delegate void AttributeChange(int reduced, int normal);
     //REDUCED CALLBACK
     public AttributeChange HealthReduced;
     public AttributeChange StaminaReduced;
@@ -12,9 +12,9 @@ public class CharacterAttributes
     public AttributeChange StaminaAdded;
     public AttributeChange MindAdded;
 
-    private int health;
-    private int stamina;
-    private int mind;
+    public int health;
+    public int stamina;
+    public int mind;
     public int Health
     {
         set

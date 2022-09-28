@@ -10,10 +10,12 @@ public class SimpleInventory : MonoBehaviour
     [SerializeField] private ItemInfoUI itemInforUI;
     [SerializeField] private Transform slotsParent;
     private InventorySlot[] slots;
+    private Player player;
     private int curSlot;
 
     private void Start()
     {
+        player = FindObjectOfType<Player>();
         inputMappings = GameObject.FindObjectOfType<Player>().inputMappings;
         inputMappings.Player.NavInventory.performed += ctx => ChangeSlot(ctx.ReadValue<float>());
 
@@ -73,24 +75,32 @@ public class SimpleInventory : MonoBehaviour
         }
 
         slots[curSlot].EnableHighlight();
-        UpdatePlayerSpriteHolder();
+        UpdateItemHolder();
     }
 
-    public void UpdatePlayerSpriteHolder()
+    public void UpdateItemHolder()
     {
-        Player player = FindObjectOfType<Player>();
+
         if (slots[curSlot].data != null)
         {
-              GameObject item = Instantiate(Resources.Load<GameObject>("Prefabs/Items/"+slots[curSlot].data.name),player.ItemHolder.transform.position,Quaternion.identity,player.ItemHolder.transform);
-              Rigidbody2D itemrb = item.GetComponent<Rigidbody2D>();
-              itemrb.simulated= false;
-        }else{
-            foreach(Transform t in player.ItemHolder.transform){
-                Destroy(t.gameObject);
-            }
+            ClearItemHolder();
+            Item item = Instantiate(Resources.Load<Item>("Prefabs/Items/" + slots[curSlot].data.name), player.ItemHolder.transform.position, Quaternion.identity, player.ItemHolder.transform);
+            item.Equip(player);
+            Rigidbody2D itemrb = item.GetComponent<Rigidbody2D>();
+            itemrb.simulated = false;
         }
     }
-
+    public void ClearItemHolder()
+    {
+        foreach (Transform t in player.ItemHolder.transform)
+        {
+            if (t.gameObject.TryGetComponent<Item>(out Item item))
+            {
+                item.UnequipItem();
+            }
+            Destroy(t.gameObject);
+        }
+    }
     private void ChangeSlot(int v)
     {
         slots[curSlot].DisableHighlight();
@@ -102,7 +112,7 @@ public class SimpleInventory : MonoBehaviour
 
         curSlot = v;
         slots[curSlot].EnableHighlight();
-        UpdatePlayerSpriteHolder();
+        UpdateItemHolder();
     }
 
     public void AddItemInAvailableSlot(ItemData item)
@@ -112,7 +122,7 @@ public class SimpleInventory : MonoBehaviour
             if (slot.data == null)
             {
                 slot.SetItem(item);
-                UpdatePlayerSpriteHolder();
+                UpdateItemHolder();
                 return;
             }
         }

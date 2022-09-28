@@ -5,14 +5,18 @@ using UnityEngine;
 public abstract class Item : MonoBehaviour
 {
     [SerializeField] private ItemData data;
+    public Character owner { get; private set; }
     public ItemData Data { get { return data; } }
 
-    public virtual void Pick(SimpleInventory inventory)
+    public virtual void Pick(Character character)
     {
-        if (inventory != null)
+        if (character != null)
         {
             Debug.Log("Picking Item");
-            inventory.AddItemInAvailableSlot(Data);
+            if (character is Player)
+            {
+                character.GetComponent<Player>().Inventory.AddItemInAvailableSlot(Data);
+            }
             Destroy(this.gameObject);
         }
     }
@@ -24,13 +28,15 @@ public abstract class Item : MonoBehaviour
     {
         Debug.Log("Using Item");
     }
-    public virtual void Equip()
+    public virtual void Equip(Character character)
     {
         Debug.Log("Equiping Item");
+        owner = character;
 
     }
     public virtual void UnequipItem()
     {
         Debug.Log("Unequiping Item");
+        owner = null;
     }
 }
