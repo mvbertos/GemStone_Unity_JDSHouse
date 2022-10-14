@@ -18,7 +18,7 @@ public class Weapon : Item
             Rigidbody2D rb2d = hit.collider.attachedRigidbody;
             if (rb2d && rb2d.TryGetComponent<Character>(out Character character) && owner != character)
             {
-                character.CharacterAttributes.Health -= damage;
+                character.Attributes.Health -= damage;
             }
         }
     }

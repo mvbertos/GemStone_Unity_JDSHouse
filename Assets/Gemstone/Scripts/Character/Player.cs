@@ -55,7 +55,6 @@ public class Player : Character
             Debug.Log("Using Item:" + inventory.GetCurrentSlot().data.name);
             GetItem().Use();
         }
-        Chat("Attacking");
     }
 
     public Item GetItem()
@@ -73,6 +72,10 @@ public class Player : Character
             if (rb.TryGetComponent<Item>(out Item item))
             {
                 item.Pick(this);
+            }
+            if (rb.TryGetComponent<Character>(out Character character))
+            {
+                character.Interacted();
             }
         }
     }

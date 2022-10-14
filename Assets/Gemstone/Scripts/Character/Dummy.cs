@@ -2,18 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Dummy : Character
 {
 
     private void Start()
     {
-        CharacterAttributes.HealthReduced += AuchDialog;
+        Attributes.HealthReduced += AuchDialog;
     }
 
     private void AuchDialog(int reduced, int normal)
     {
-        Chat("ouch man stop it!");
+        string[] messages = { "Ouch!", "Stop IT!", "Mother F*****" };
+        DialogueHandler.Instance.Chat(this, messages[Random.Range(0, messages.Length)]);
     }
 
     public override void Attack()
@@ -28,6 +30,7 @@ public class Dummy : Character
 
     public override void Interacted()
     {
-        Chat("Hello i´m mr.dummy you dum");
+        string[] messages = { "Hey you.", "How is goin´. ", "Creepy room, eh!?" };
+        DialogueHandler.Instance.Chat(this, messages[Random.Range(0, messages.Length)]);
     }
 }

@@ -1,0 +1,13 @@
+<diagram program="umletino" version="15.0.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>150</x><y>190</y><w>230</w><h>210</h></coordinates><panel_attributes>Character::Monobehaviour
+--
+#attributes:CharacterAttributes
+#interactLayers:LayerMask
+#interactRange:int
+--
+# Awake():void
+- ValidadeDeath(int new,int old):void
+/+ Interact():void/
+/+ Interacted():void/
+/+ Attack():void /
+
+</panel_attributes><additional_attributes></additional_attributes></element></diagram>

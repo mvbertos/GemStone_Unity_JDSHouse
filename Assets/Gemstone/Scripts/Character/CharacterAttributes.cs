@@ -1,4 +1,4 @@
-
+using UnityEngine;
 [System.Serializable]
 public class CharacterAttributes
 {
@@ -12,14 +12,14 @@ public class CharacterAttributes
     public AttributeChange StaminaAdded;
     public AttributeChange MindAdded;
 
-    public int health;
-    public int stamina;
-    public int mind;
+    [SerializeField] private int health;
+    [SerializeField] private int stamina;
+    [SerializeField] private int mind;
     public int Health
     {
         set
         {
-            if (value <= 0)
+            if (value < health)
             {
                 //reducing
                 HealthReduced?.Invoke(value, health);

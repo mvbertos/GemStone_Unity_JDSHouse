@@ -5,13 +5,13 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    [SerializeField] private CharacterAttributes characterAttributes;
-    public CharacterAttributes CharacterAttributes { get { return characterAttributes; } }
+    [SerializeField] private CharacterAttributes attributes;
+    public CharacterAttributes Attributes { get { return attributes; } }
 
 
     protected void Awake()
     {
-        characterAttributes.HealthReduced += ValidateDeath;
+        attributes.HealthReduced += ValidateDeath;
     }
 
     private void ValidateDeath(int reduced, int normal)
@@ -22,14 +22,8 @@ public abstract class Character : MonoBehaviour
         }
     }
 
-    protected virtual void Chat(String msg)
-    {
-        DialogueBox c = Instantiate<DialogueBox>(Resources.Load<DialogueBox>("Prefabs/UI/DialogueBox"), this.transform.position + this.transform.up, Quaternion.identity, this.transform);
-        c.SetText(msg);
-    }
-
     [SerializeField] protected LayerMask interactLayers;
-    [SerializeField] protected int interactRange = 1;
+    [SerializeField] protected float interactRange = 1;
 
     public abstract void Interacted();
     public abstract void Attack();
