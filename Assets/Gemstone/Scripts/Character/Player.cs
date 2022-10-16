@@ -8,10 +8,10 @@ public class Player : Character
 {
     public InputMappings inputMappings { private set; get; }
     [SerializeField] private SimpleInventory inventory;
+    
     public SimpleInventory Inventory { get { return inventory; } }
     private Vector2 aimDirection;
-    [SerializeField] private Transform indicator;
-    public Transform Indicator { get { return indicator; } }
+
     [SerializeField] private SpriteRenderer itemHolder;
     public SpriteRenderer ItemHolder { get { return itemHolder; } }
 
@@ -21,7 +21,6 @@ public class Player : Character
         inputMappings = new InputMappings();
         inputMappings.Player.Fire.performed += ctx => Attack();
         inputMappings.Player.Interact.performed += ctx => Interact();
-        inputMappings.Player.Inventory.performed += ctx => OpenInventory();
         inputMappings.Player.Drop.performed += ctx => DropItem();
 
     }
@@ -34,8 +33,8 @@ public class Player : Character
 
         float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
 
-        indicator.transform.localPosition = aimDirection;
-        indicator.transform.eulerAngles = new Vector3(0, 0, angle);
+        Aim.transform.localPosition = aimDirection;
+        Aim.transform.eulerAngles = new Vector3(0, 0, angle);
     }
 
     private void OnEnable()
@@ -94,11 +93,6 @@ public class Player : Character
     public override void Interacted()
     {
         Debug.Log("Being Interacted");
-    }
-
-    private void OpenInventory()
-    {
-        inventory.gameObject.SetActive(!inventory.gameObject.activeInHierarchy);
     }
 
     private void OnDrawGizmos()

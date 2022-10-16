@@ -81,10 +81,11 @@ public class SimpleInventory : MonoBehaviour
     public void UpdateItemHolder()
     {
 
+        ClearItemHolder();
         if (slots[curSlot].data != null)
         {
-            ClearItemHolder();
-            Item item = Instantiate(Resources.Load<Item>("Prefabs/Items/" + slots[curSlot].data.name), player.ItemHolder.transform.position, Quaternion.identity, player.ItemHolder.transform);
+            GameObject itemPrefab = Instantiate(Resources.Load<GameObject>("Prefabs/Items/" + slots[curSlot].data.name), player.ItemHolder.transform.position, Quaternion.identity, player.ItemHolder.transform);
+            Item item = itemPrefab.GetComponent<Item>();
             item.Equip(player);
             Rigidbody2D itemrb = item.GetComponent<Rigidbody2D>();
             itemrb.simulated = false;
@@ -98,6 +99,7 @@ public class SimpleInventory : MonoBehaviour
             {
                 item.UnequipItem();
             }
+
             Destroy(t.gameObject);
         }
     }

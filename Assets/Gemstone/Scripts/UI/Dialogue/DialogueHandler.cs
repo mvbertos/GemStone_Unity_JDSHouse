@@ -29,22 +29,24 @@ public class DialogueHandler
     {
         //for each message
         //display on character´s position
-        DialogueBox dialogueInst = null;
+        DialogueBox dialogueInst = character.GetComponentInChildren<DialogueBox>();
         Transform dialoguePoint = character.transform.Find("DialoguePoint");
-
-        if (dialoguePoint != null)
+        
+        if (!dialogueInst)
         {
-            dialogueInst = GameObject.Instantiate<DialogueBox>(dialoguePref, dialoguePoint.position, dialoguePoint.rotation, dialoguePoint);
+            if (dialoguePoint != null)
+            {
+                dialogueInst = GameObject.Instantiate<DialogueBox>(dialoguePref, dialoguePoint.position, dialoguePoint.rotation, dialoguePoint);
+            }
+            else
+            {
+                dialogueInst = GameObject.Instantiate<DialogueBox>(dialoguePref, character.transform.position, character.transform.rotation, character.transform);
+            }
         }
-        else
-        {
 
-            dialogueInst = GameObject.Instantiate<DialogueBox>(dialoguePref, character.transform.position, character.transform.rotation, character.transform);
-        }
-
-        dialogueInst.SetText(messages, 5);
-        Debug.Log("Speaking");
+        dialogueInst.SetText(messages);
     }
+
     public void Chat(Character character, string message)
     {
         string[] s = { message };

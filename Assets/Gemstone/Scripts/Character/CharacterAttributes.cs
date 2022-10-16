@@ -15,6 +15,7 @@ public class CharacterAttributes
     [SerializeField] private int health;
     [SerializeField] private int stamina;
     [SerializeField] private int mind;
+    [SerializeField] private int damage;
     public int Health
     {
         set
@@ -76,6 +77,13 @@ public class CharacterAttributes
         get
         {
             return mind;
+        }
+    }
+    public int Damage
+    {
+        get
+        {
+            return damage;
         }
     }
 

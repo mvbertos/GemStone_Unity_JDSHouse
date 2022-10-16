@@ -1,33 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="15.0.0">
-  <zoom_level>10</zoom_level>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>400</x>
-      <y>90</y>
-      <w>270</w>
-      <h>230</h>
-    </coordinates>
-    <panel_attributes>Room
+<diagram program="umletino" version="15.0.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>390</x><y>90</y><w>270</w><h>230</h></coordinates><panel_attributes>Room
 --
 +OnEnterRoom:Action
 +OnExitRoom:Action
 --
 -OnTriggerEnter():void
 -OnTriggerExit():void
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>10</x>
-      <y>90</y>
-      <w>380</w>
-      <h>240</h>
-    </coordinates>
-    <panel_attributes>Scenario
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>90</y><w>380</w><h>240</h></coordinates><panel_attributes>Scenario
 --
 -hideSprite:SpriteRenederer
 --
@@ -44,7 +22,4 @@ Responsabilities
 --Spawn nemesis if player keeps too much
 at the room.
 --Randomize props in the rooms based on 
-pre made prop maps.</panel_attributes>
-    <additional_attributes/>
-  </element>
-</diagram>
+pre made prop maps.</panel_attributes><additional_attributes></additional_attributes></element></diagram>
