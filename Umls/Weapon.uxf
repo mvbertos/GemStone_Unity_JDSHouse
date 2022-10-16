@@ -25,6 +25,7 @@ Aim() : void</panel_attributes><additional_attributes></additional_attributes></
 # attackLayers : LayerMask 
 
 - radius : Float
+- hitAudioSource: AudioSource
 - hitsound : AudioClip
 - hitEffect : EffectSystem
 --

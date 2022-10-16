@@ -32,18 +32,18 @@ public class Scenario : MonoBehaviour
 
     private void NemesisTimer()
     {
-        if (FindObjectsOfType<Enemy>().Length > 0 && nemesis && nemesiscurTime > -1)
-        {
-            nemesiscurTime -= Time.fixedDeltaTime;
-            if (nemesiscurTime <= 0)
-            {
-                SpawnNemesis();
-            }
-        }
-        else
-        {
-            nemesiscurTime = nemesisTimer;
-        }
+        // if (FindObjectsOfType<Enemy>().Length > 0 && nemesis && nemesiscurTime > -1)
+        // {
+        //     nemesiscurTime -= Time.fixedDeltaTime;
+        //     if (nemesiscurTime <= 0)
+        //     {
+        //         SpawnNemesis();
+        //     }
+        // }
+        // else
+        // {
+        //     nemesiscurTime = nemesisTimer;
+        // }
     }
 
     private void SpawnNemesis()

@@ -2,10 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class InputMovimentation : MonoBehaviour
 {
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip[] stepClips;
+    private float currentStepTempo;
     [SerializeField] Transform sight;
     InputMappings inputMappings;
     Rigidbody2D rb;
@@ -34,6 +38,19 @@ public class InputMovimentation : MonoBehaviour
         Move(inputMappings.Player.Move.ReadValue<Vector2>(), speed);
         Rotate(inputMappings.Player.Look.ReadValue<Vector2>());
     }
+    void Update()
+    {
+        if (rb.velocity.magnitude > 0.1f)
+        {
+            currentStepTempo -= Time.deltaTime;
+            if (currentStepTempo <= 0)
+            {
+                audioSource.clip = stepClips[Random.Range(0, stepClips.Length)];
+                audioSource.Play();
+                currentStepTempo = 2 / speed;
+            }
+        }
+    }
 
     private void Rotate(Vector2 deltaMouse)
     {
@@ -42,8 +59,8 @@ public class InputMovimentation : MonoBehaviour
         Vector2 targetDir = mousePos - (Vector2)this.transform.position;
 
         float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
-        
-        sight.eulerAngles = new Vector3(0, 0, angle-90);
+
+        sight.eulerAngles = new Vector3(0, 0, angle - 90);
 
     }
 

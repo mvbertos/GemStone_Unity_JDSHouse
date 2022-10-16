@@ -5,6 +5,9 @@ using UnityEngine;
 public abstract class Item : MonoBehaviour
 {
     [SerializeField] private ItemData data;
+    [SerializeField] protected AudioClip pickClip;
+    [SerializeField] protected AudioSource itemAudioSource;
+
     public Character owner { get; private set; }
     public ItemData Data { get { return data; } }
 
@@ -12,7 +15,6 @@ public abstract class Item : MonoBehaviour
     {
         if (character != null)
         {
-            Debug.Log("Picking Item");
             if (character is Player)
             {
                 character.GetComponent<Player>().Inventory.AddItemInAvailableSlot(Data);
@@ -28,12 +30,14 @@ public abstract class Item : MonoBehaviour
     {
         Debug.Log("Using Item");
     }
+
     public virtual void Equip(Character character)
     {
-        Debug.Log("Equiping Item");
+        itemAudioSource.clip = pickClip;
+        itemAudioSource.Play();
         owner = character;
-
     }
+
     public virtual void UnequipItem()
     {
         Debug.Log("Unequiping Item");
