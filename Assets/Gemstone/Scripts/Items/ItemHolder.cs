@@ -12,12 +12,25 @@ public class ItemHolder : MonoBehaviour
         animator = this.gameObject.GetComponent<Animator>();
     }
 
-    private void UseItem()
+    public void UseItem()
     {
         Item item = this.gameObject.GetComponentInChildren<Item>();
         if (item)
         {
             item.Use();
+        }
+    }
+
+    public void Clear()
+    {
+        foreach (Transform t in this.transform)
+        {
+            if (t.gameObject.TryGetComponent<Item>(out Item item))
+            {
+                item.UnequipItem();
+            }
+
+            Destroy(t.gameObject);
         }
     }
 }

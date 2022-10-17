@@ -10,12 +10,13 @@ public class SimpleInventory : MonoBehaviour
     [SerializeField] private ItemInfoUI itemInforUI;
     [SerializeField] private Transform slotsParent;
     private InventorySlot[] slots;
-    private Player player;
+    [SerializeField] private Player player;
+    private ItemHolder itemHolder;
     private int curSlot;
 
     private void Start()
     {
-        player = FindObjectOfType<Player>();
+        itemHolder = player.ItemHolder;
         inputMappings = GameObject.FindObjectOfType<Player>().inputMappings;
         inputMappings.Player.NavInventory.performed += ctx => ChangeSlot(ctx.ReadValue<float>());
 
@@ -81,28 +82,18 @@ public class SimpleInventory : MonoBehaviour
     public void UpdateItemHolder()
     {
 
-        ClearItemHolder();
+        itemHolder.Clear();
+
         if (slots[curSlot].data != null)
         {
-            GameObject itemPrefab = Instantiate(Resources.Load<GameObject>("Prefabs/Items/" + slots[curSlot].data.name), player.ItemHolder.transform.position, Quaternion.identity, player.ItemHolder.transform);
+            GameObject itemPrefab = Instantiate(Resources.Load<GameObject>("Prefabs/Items/" + slots[curSlot].data.name), itemHolder.transform.position, Quaternion.identity, itemHolder.transform);
             Item item = itemPrefab.GetComponent<Item>();
             item.Equip(player);
             Rigidbody2D itemrb = item.GetComponent<Rigidbody2D>();
             itemrb.simulated = false;
         }
     }
-    public void ClearItemHolder()
-    {
-        foreach (Transform t in player.ItemHolder.transform)
-        {
-            if (t.gameObject.TryGetComponent<Item>(out Item item))
-            {
-                item.UnequipItem();
-            }
 
-            Destroy(t.gameObject);
-        }
-    }
     private void ChangeSlot(int v)
     {
         slots[curSlot].DisableHighlight();

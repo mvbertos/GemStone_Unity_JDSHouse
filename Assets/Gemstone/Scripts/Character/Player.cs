@@ -9,13 +9,11 @@ public class Player : Character
     public InputMappings inputMappings { private set; get; }
     [SerializeField] private SimpleInventory inventory;
     [SerializeField] private Animator playerAnimator;
-    [SerializeField] private ItemHolder itemHolderComp;
+    [SerializeField] private ItemHolder itemHolder;
+    public ItemHolder ItemHolder { get { return itemHolder; } }
 
     public SimpleInventory Inventory { get { return inventory; } }
     private Vector2 aimDirection;
-
-    [SerializeField] private SpriteRenderer itemHolder;
-    public SpriteRenderer ItemHolder { get { return itemHolder; } }
 
     private void Awake()
     {
@@ -54,18 +52,10 @@ public class Player : Character
         if (inventory.GetCurrentSlot().data != null)
         {
             Debug.Log("Using Item:" + inventory.GetCurrentSlot().data.name);
-            itemHolderComp.animator.Play("MeleeAttack");
+            itemHolder.animator.Play("MeleeAttack");
         }
     }
-    public void UseEquipedItem()
-    {
-        GetItem().Use();
-    }
 
-    public Item GetItem()
-    {
-        return ItemHolder.GetComponentInChildren<Item>();
-    }
     public override void Interact()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
