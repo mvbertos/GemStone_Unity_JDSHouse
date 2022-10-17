@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 public class InputMovimentation : MonoBehaviour
 {
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private Animator playerAnimator;
     [SerializeField] private AudioClip[] stepClips;
     private float currentStepTempo;
     [SerializeField] Transform sight;
@@ -47,9 +48,12 @@ public class InputMovimentation : MonoBehaviour
             {
                 audioSource.clip = stepClips[Random.Range(0, stepClips.Length)];
                 audioSource.Play();
-                currentStepTempo = 2 / speed;
+                currentStepTempo = speed / 8;
             }
         }
+
+        playerAnimator.SetFloat("MoveX", rb.velocity.x);
+        playerAnimator.SetFloat("MoveY", rb.velocity.y);
     }
 
     private void Rotate(Vector2 deltaMouse)

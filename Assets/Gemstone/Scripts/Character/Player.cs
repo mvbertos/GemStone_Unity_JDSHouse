@@ -8,7 +8,9 @@ public class Player : Character
 {
     public InputMappings inputMappings { private set; get; }
     [SerializeField] private SimpleInventory inventory;
-    
+    [SerializeField] private Animator playerAnimator;
+    [SerializeField] private ItemHolder itemHolderComp;
+
     public SimpleInventory Inventory { get { return inventory; } }
     private Vector2 aimDirection;
 
@@ -52,8 +54,12 @@ public class Player : Character
         if (inventory.GetCurrentSlot().data != null)
         {
             Debug.Log("Using Item:" + inventory.GetCurrentSlot().data.name);
-            GetItem().Use();
+            itemHolderComp.animator.Play("MeleeAttack");
         }
+    }
+    public void UseEquipedItem()
+    {
+        GetItem().Use();
     }
 
     public Item GetItem()

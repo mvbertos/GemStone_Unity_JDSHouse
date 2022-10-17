@@ -24,7 +24,6 @@ public class FollowAndAttackPlayer : State<NPC>
         character.movimentation.MoveToPosition(GameObject.FindObjectOfType<Player>().transform.position, () =>
         {
             character.Attack();
-            character.stateMachine.ChangeState(null);
         });
 
     }
