@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Gemstone/Scenes/Sample.unity
+    path: Assets/Gemstone/Scenes/Sample/Sample.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Gemstone/Scenes/Screens/Menu.unity
+    guid: 4ec84ab43d5a5d24c80fbe5d309179c4
   m_configObjects: {}

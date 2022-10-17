@@ -11,6 +11,8 @@ public abstract class Character : MonoBehaviour
     [SerializeField] private Transform aim;
     public Transform Aim { get { return aim; } }
 
+    protected Action OnDeath;
+
     [SerializeField] private ParticleSystem hurtParticleEffect;
     public ParticleSystem HurtParticleEffect
     {
@@ -34,6 +36,7 @@ public abstract class Character : MonoBehaviour
     {
         if (reduced <= 0)
         {
+            OnDeath?.Invoke();
             Destroy(this.gameObject);
         }
     }

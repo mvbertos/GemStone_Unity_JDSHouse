@@ -14,7 +14,7 @@ public class ItemHolder : MonoBehaviour
 
     public void UseItem()
     {
-        Item item = this.gameObject.GetComponentInChildren<Item>();
+        Item item = GetItem();
         if (item)
         {
             item.Use();
@@ -32,5 +32,9 @@ public class ItemHolder : MonoBehaviour
 
             Destroy(t.gameObject);
         }
+    }
+    public Item GetItem()
+    {
+        return this.gameObject.GetComponentInChildren<Item>();
     }
 }

@@ -22,7 +22,10 @@ public class Player : Character
         inputMappings.Player.Fire.performed += ctx => Attack();
         inputMappings.Player.Interact.performed += ctx => Interact();
         inputMappings.Player.Drop.performed += ctx => DropItem();
-
+        // OnDeath += () =>
+        // {
+        //     SceneManager.LoadScene("Menu");
+        // };
     }
 
     private void Update()
@@ -71,6 +74,17 @@ public class Player : Character
             if (rb.TryGetComponent<Character>(out Character character))
             {
                 character.Interacted();
+            }
+            if (rb.TryGetComponent<ExitDoor>(out ExitDoor door))
+            {
+                if (itemHolder.GetItem() != null && itemHolder.GetItem().Data.name == "Key")
+                {
+                    door.Open();
+                }
+                else
+                {
+                    DialogueHandler.Instance.Chat(this, "I don´t have the key yet.");
+                }
             }
         }
     }
